@@ -4,6 +4,7 @@ import (
 	"recipe-back/controllers"
 	"recipe-back/initializers"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,6 +15,11 @@ func init() {
 
 func main() {
 	r := gin.Default()
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"} // Add your frontend URL
+	r.Use(cors.New(config))
+
 	r.POST("/recipes", controllers.CreateRecipe)
 	r.GET("/recipes", controllers.GetRecipe)
 	r.GET("/recipes/:id", controllers.GetSingleRecipe)

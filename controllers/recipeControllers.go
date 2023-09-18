@@ -44,8 +44,7 @@ func GetSingleRecipe(c *gin.Context) {
 }
 
 func GetRecipe(c *gin.Context) {
-	var recipes []models.SavedRecipe // Changed to slice
-
+	var recipes []models.SavedRecipe
 	result := initializers.DB.Find(&recipes)
 
 	if result.Error != nil {
@@ -56,7 +55,7 @@ func GetRecipe(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"recipes": recipes, // Corrected variable name
+		"recipes": recipes,
 	})
 }
 
